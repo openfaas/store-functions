@@ -15,7 +15,7 @@ functions:
   shasum:
     lang: dockerfile
     handler: ./shasum
-    image:  ghcr.io/${OWNER:-openfaas}/shasum:${TAG:-latest}
+    image: ghcr.io/${OWNER:-openfaas}/shasum:${TAG:-latest}
 
   hey:
     lang: dockerfile
@@ -56,3 +56,9 @@ functions:
     handler: ./sentimentanalysis
     image: ghcr.io/${OWNER:-openfaas}/sentimentanalysis:${TAG:-latest}
 
+  sleep:
+    lang: go
+    handler: ./sleep
+    image: ghcr.io/${OWNER:-openfaas}/sleep:${TAG:-latest}
+    environment:
+      sleep_duration: 2s
