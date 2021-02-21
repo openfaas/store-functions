@@ -1,0 +1,39 @@
+provider:
+  name: openfaas
+
+functions:
+  alpine:
+    lang: dockerfile
+    handler: ./alpine
+    image: ghcr.io/openfaas/alpine:latest
+
+  curl:
+    lang: dockerfile
+    handler: ./curl
+    image: ghcr.io/openfaas/curl:latest
+
+  shasum:
+    lang: dockerfile
+    handler: ./shasum
+    image:  ghcr.io/openfaas/shasum:latest
+
+  hey:
+    lang: dockerfile
+    handler: ./hey
+    image: ghcr.io/openfaas/hey:latest
+
+  nmap:
+    lang: dockerfile
+    handler: ./nmap
+    image: nmap:latest
+
+  nodeinfo:
+    lang: node12
+    handler: ./nodeinfo
+    image: nodeinfo:latest
+
+  figlet:
+    lang: dockerfile
+    handler: ./figlet
+    image: figlet:latest
+
