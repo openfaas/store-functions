@@ -62,3 +62,4 @@ functions:
     image: ghcr.io/${OWNER:-openfaas}/sleep:${TAG:-latest}
     environment:
       sleep_duration: 2s
+      combine_output: false
