@@ -15,9 +15,8 @@ WORKDIR /home/app
 
 USER app
 
-# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
-ENV fprocess="cat"
-# Set to true to see request in function logs
+ENV fprocess="sha512sum"
+
 ENV write_debug="false"
 
 EXPOSE 8080

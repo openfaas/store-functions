@@ -17,7 +17,6 @@ WORKDIR /home/app
 
 USER app
 
-
 ENV fprocess="xargs curl"
 
 ENV write_debug="false"
