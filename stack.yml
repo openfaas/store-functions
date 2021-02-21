@@ -5,35 +5,34 @@ functions:
   alpine:
     lang: dockerfile
     handler: ./alpine
-    image: ghcr.io/openfaas/alpine:latest
+    image: ghcr.io/${OWNER:-:openfaas}/alpine${TAG:-:latest}
 
   curl:
     lang: dockerfile
     handler: ./curl
-    image: ghcr.io/openfaas/curl:latest
+    image: ghcr.io/${OWNER:-:openfaas}/curl${TAG:-:latest}
 
   shasum:
     lang: dockerfile
     handler: ./shasum
-    image:  ghcr.io/openfaas/shasum:latest
+    image:  ghcr.io/${OWNER:-:openfaas}/shasum${TAG:-:latest}
 
   hey:
     lang: dockerfile
     handler: ./hey
-    image: ghcr.io/openfaas/hey:latest
+    image: ghcr.io/${OWNER:-:openfaas}/hey${TAG:-:latest}
 
   nmap:
     lang: dockerfile
     handler: ./nmap
-    image: nmap:latest
+    image: ghcr.io/${OWNER:-:openfaas}/nmap${TAG:-:latest}
 
   nodeinfo:
     lang: node12
     handler: ./nodeinfo
-    image: nodeinfo:latest
+    image: ghcr.io/${OWNER:-:openfaas}/nodeinfo${TAG:-:latest}
 
   figlet:
     lang: dockerfile
     handler: ./figlet
-    image: figlet:latest
-
+    image: ghcr.io/${OWNER:-:openfaas}/figlet${TAG:-:latest}
