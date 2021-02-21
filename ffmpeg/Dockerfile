@@ -4,7 +4,7 @@ FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.13
 
 RUN mkdir -p /home/app
 
-RUN apk install --no-cache curl
+RUN apk add --no-cache ffmpeg
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
@@ -17,9 +17,9 @@ WORKDIR /home/app
 
 USER app
 
-
-ENV fprocess="xargs curl"
-
+# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
+ENV fprocess="ffmpeg"
+# Set to true to see request in function logs
 ENV write_debug="false"
 
 EXPOSE 8080

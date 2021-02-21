@@ -1,31 +1,48 @@
-FROM openfaas/classic-watchdog:0.18.1 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.1.4 as watchdog
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.15-alpine3.12 as builder
 
-FROM alpine:3.13
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
 
-RUN mkdir -p /home/app
+# Required to enable Go modules
+RUN apk add --no-cache git
 
-COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
-RUN chmod +x /usr/bin/fwatchdog
+# Allows you to add additional packages via build-arg
+ARG ADDITIONAL_PACKAGE
+ARG CGO_ENABLED=0
+ARG GO111MODULE="off"
+ARG GOPROXY=""
+ARG GOFLAGS=""
 
-# Add non root user
-RUN addgroup -S app && adduser app -S -G app && chown app /home/app
+ENV CGO_ENABLED=0
+
+WORKDIR /go/src/github.com/rakyll/
+RUN git clone https://github.com/rakyll/hey --depth=1
+WORKDIR /go/src/github.com/rakyll/hey/
+RUN mkdir -p bin
+
+RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=${CGO_ENABLED} \
+    go build --ldflags "-s -w" -a -installsuffix cgo -o bin/hey .
+
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.13
+RUN apk --no-cache add ca-certificates \
+    && addgroup -S app && adduser -S -g app app \
+    && mkdir -p /home/app \
+    && chown app /home/app
 
 WORKDIR /home/app
 
-# setup hey
-RUN apk --no-cache add curl && curl -o /home/app/hey https://storage.googleapis.com/hey-release/hey_linux_amd64 && chmod +x /home/app/hey
+COPY --from=builder /go/src/github.com/rakyll/hey/bin/hey         .
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
 
-# Change from root user
+RUN chown -R app /home/app
+
 USER app
 
-# Setup some timeouts for this function...
-ENV write_timeout="60"
-
-# Run the function
 ENV fprocess="xargs ./hey"
-# Set to true to see request in function logs
-ENV write_debug="false"
-
 EXPOSE 8080
 
 HEALTHCHECK --interval=3s CMD [ -e /tmp/.lock ] || exit 1
