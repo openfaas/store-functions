@@ -36,6 +36,7 @@ functions:
     lang: dockerfile
     handler: ./figlet
     image: ghcr.io/${OWNER:-openfaas}/figlet:${TAG:-latest}
+
   imagemagick:
     lang: dockerfile
     handler: ./imagemagick
