@@ -4,7 +4,7 @@ FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.13
 
 RUN mkdir -p /home/app
 
-RUN apk install --no-cache curl
+RUN apk add --no-cache curl
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog

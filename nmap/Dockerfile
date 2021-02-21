@@ -6,7 +6,7 @@ RUN mkdir -p /home/app
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
-RUN apk install --no-cache nmap
+RUN apk add --no-cache nmap
 
 # Add non root user
 RUN addgroup -S app && adduser app -S -G app
