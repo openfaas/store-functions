@@ -46,3 +46,13 @@ functions:
     lang: dockerfile
     handler: ./ffmpeg
     image: ghcr.io/${OWNER:-openfaas}/ffmpeg:${TAG:-latest}
+  sentimentanalysis:
+    lang: dockerfile
+    handler: ./sentimentanalysis
+    image: sentimentanalysis:latest
+
+  sentimentanalysis:
+    lang: dockerfile
+    handler: ./sentimentanalysis
+    image: ghcr.io/${OWNER:-openfaas}/sentimentanalysis:${TAG:-latest}
+
