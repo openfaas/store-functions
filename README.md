@@ -1,6 +1,6 @@
 # store-functions
 
-The source code for official OpenFaaS Store Functions.
+Common CLIs packaged with a HTTP interface
 
 About these functions:
 
