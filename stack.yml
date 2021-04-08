@@ -12,6 +12,11 @@ functions:
     handler: ./curl
     image: ghcr.io/${OWNER:-openfaas}/curl:${TAG:-latest}
 
+  dig:
+    lang: dockerfile
+    handler: ./dig
+    image: ghcr.io/${OWNER:-openfaas}/dig:${TAG:-latest}
+
   shasum:
     lang: dockerfile
     handler: ./shasum

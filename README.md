@@ -45,6 +45,7 @@ curl http://127.0.0.1:8080 -d "-c 5 -n 1000 https://your-service.com/"
 
 * `alpine` - a base for running built-in bash or busybox commands like `env` (use it to debug headers) or `wc -l` to count text within a body
 * `curl` - debug outgoing networking or internal services
+* `dig` - debug DNS resolution from inside your cluster
 * `figlet` - print ASCII logso
 * `hey` - run a load-test against a HTTP API, website, or function with [hey](https://github.com/rakyll/hey)
 * `nmap` - scan a network range

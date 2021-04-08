@@ -29,15 +29,15 @@ jobs:
         run: >
           echo ::set-output name=repo_owner::$(echo ${{ github.repository_owner }} |
           tr '[:upper:]' '[:lower:]')
-      - name: Docker Login
-        run: > 
-          echo ${{secrets.DOCKER_PASSWORD}} | 
-          docker login ghcr.io --username 
-          ${{ steps.get_repo_owner.outputs.repo_owner }} 
-          --password-stdin
+      - name: Login to Docker Registry
+        uses: docker/login-action@v1
+        with:
+          username: ${{ steps.get_repo_owner.outputs.repo_owner }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
       - name: Publish functions
         run: >
-          OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}" 
+          OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}"
           TAG="latest"
           faas-cli publish
           --extra-tag ${{ github.sha }}
