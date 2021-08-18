@@ -27,6 +27,11 @@ functions:
     handler: ./nmap
     image: ghcr.io/${OWNER:-openfaas}/nmap:${TAG:-latest}
 
+  nslookup:
+    lang: dockerfile
+    handler: ./nslookup
+    image: ghcr.io/${OWNER:-openfaas}/nslookup:${TAG:-latest}
+
   nodeinfo:
     lang: node12
     handler: ./nodeinfo
