@@ -31,7 +31,7 @@ jobs:
           tr '[:upper:]' '[:lower:]')
       - name: Docker Login
         run: > 
-          echo ${{secrets.DOCKER_PASSWORD}} | 
+          echo ${{ secrets.GITHUB_TOKEN }} | 
           docker login ghcr.io --username 
           ${{ steps.get_repo_owner.outputs.repo_owner }} 
           --password-stdin
