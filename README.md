@@ -1,12 +1,16 @@
 # store-functions
 
-Common CLIs packaged with a HTTP interface
+Common CLIs packaged in containers with a HTTP interface
 
 About these functions:
 
 * They are multi-arch - for `armhf`, `arm64` and `x86_64`
 * They are built with `faas-cli`
 * They are built and published to GHCR as container images to avoid the Docker Hub's rate limits
+
+You may also like the bash template for OpenFaaS, so you can perform multiple tasks with CLIs or call your scripts over HTTPS.
+
+* [Bash streaming templates](https://github.com/alexellis/openfaas-streaming-templates#example-with-bash)
 
 ## Using the functions
 
