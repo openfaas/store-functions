@@ -68,3 +68,8 @@ functions:
     environment:
       sleep_duration: 2s
       combine_output: false
+
+  cows:
+    lang: node14
+    handler: ./cows
+    image: ghcr.io/${OWNER:-openfaas}/cows:${TAG:-latest}
