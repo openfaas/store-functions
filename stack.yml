@@ -2,6 +2,11 @@ provider:
   name: openfaas
 
 functions:
+  cows:
+    lang: node14
+    handler: ./cows
+    image: ghcr.io/${OWNER:-openfaas}/cows:${TAG:-latest}
+
   alpine:
     lang: dockerfile
     handler: ./alpine
@@ -69,7 +74,3 @@ functions:
       sleep_duration: 2s
       combine_output: false
 
-  cows:
-    lang: node14
-    handler: ./cows
-    image: ghcr.io/${OWNER:-openfaas}/cows:${TAG:-latest}
