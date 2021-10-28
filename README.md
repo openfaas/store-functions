@@ -2,6 +2,9 @@
 
 Common CLIs packaged in containers with a HTTP interface
 
+[![Sponsor this](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/openfaas)](https://github.com/sponsors/openfaas)
+[![build](https://github.com/openfaas/store-functions/actions/workflows/build.yaml/badge.svg)](https://github.com/openfaas/store-functions/actions/workflows/build.yaml)
+
 About these functions:
 
 * They are multi-arch - for `armhf`, `arm64` and `x86_64`
