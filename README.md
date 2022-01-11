@@ -59,6 +59,7 @@ curl http://127.0.0.1:8080 -d "-c 5 -n 1000 https://your-service.com/"
 * `sleep` - debug timeouts or async by sleeping for a set duration
 * `sentimentanalysis` - use Python's textblob library to find out if a statement is positive or negative
 * `shasum` - generate a SHA for a given input
+* `youtubedl` - downloads a youtube video
 
 Other functions: `imagemagick`, `ffmpeg`.
 
