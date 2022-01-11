@@ -57,6 +57,16 @@ functions:
     handler: ./ffmpeg
     image: ghcr.io/${OWNER:-openfaas}/ffmpeg:${TAG:-latest}
 
+  youtubedl:
+    lang: dockerfile
+    handler: ./youtubedl
+    # image: ghcr.io/${OWNER:-openfaas}/youtubedl:${TAG:-latest}
+    image: ctadeu/test:${TAG:-latest}
+    environment:
+      read_timeout: 300s
+      write_timeout: 300s
+    labels:
+      com.openfaas.ui.ext: "mp4"
 
   sentimentanalysis:
     lang: dockerfile
@@ -70,4 +80,3 @@ functions:
     environment:
       sleep_duration: 2s
       combine_output: false
-
