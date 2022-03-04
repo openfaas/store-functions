@@ -3,7 +3,7 @@ provider:
 
 functions:
   cows:
-    lang: node14
+    lang: node17
     handler: ./cows
     image: ghcr.io/${OWNER:-openfaas}/cows:${TAG:-latest}
 
@@ -38,7 +38,7 @@ functions:
     image: ghcr.io/${OWNER:-openfaas}/nslookup:${TAG:-latest}
 
   nodeinfo:
-    lang: node12
+    lang: node17
     handler: ./nodeinfo
     image: ghcr.io/${OWNER:-openfaas}/nodeinfo:${TAG:-latest}
 
