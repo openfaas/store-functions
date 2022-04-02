@@ -4,6 +4,8 @@ FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.14
 
 RUN mkdir -p /home/app
 
+RUN apk add --no-cache imagemagick
+
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
 
