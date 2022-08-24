@@ -71,3 +71,8 @@ functions:
       sleep_duration: 2s
       combine_output: false
 
+  haveibeenpwned:
+    lang: go
+    handler: ./haveibeenpwned
+    image: ghcr.io/${OWNER:-openfaas}/haveibeenpwned:${TAG:-latest}
+
