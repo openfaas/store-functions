@@ -1,10 +1,10 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.1.4 as watchdog
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.14
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.16
 
 RUN mkdir -p /home/app
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl ca-certificates
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
