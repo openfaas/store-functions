@@ -76,3 +76,12 @@ functions:
     handler: ./haveibeenpwned
     image: ghcr.io/${OWNER:-openfaas}/haveibeenpwned:${TAG:-latest}
 
+  printer:
+    lang: golang-middleware
+    handler: ./printer
+    image: ghcr.io/${OWNER:-openfaas}/printer:${TAG:-latest}
+
+configuration:
+  templates:
+    - name: golang-middleware
+      source: https://github.com/openfaas/golang-http-template
