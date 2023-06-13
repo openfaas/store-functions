@@ -16,7 +16,7 @@ WORKDIR /home/app
 
 USER app
 
-ENV fprocess="xargs bind-tools"
+ENV fprocess="xargs nslookup"
 
 ENV write_debug="false"
 
