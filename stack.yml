@@ -68,11 +68,6 @@ functions:
     labels:
       com.openfaas.ui.ext: "mp4"
 
-  sentimentanalysis:
-    lang: dockerfile
-    handler: ./sentimentanalysis
-    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/sentimentanalysis:${TAG:-latest}
-
   sleep:
     lang: go
     handler: ./sleep
@@ -91,7 +86,13 @@ functions:
     handler: ./printer
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/printer:${TAG:-latest}
 
+  certinfo:
+    lang: go
+    handler: ./certinfo
+    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/certinfo-fn:${TAG:-latest}
+
 configuration:
   templates:
     - name: golang-middleware
       source: https://github.com/openfaas/golang-http-template
+

@@ -38,7 +38,7 @@ jobs:
           docker login ghcr.io --username 
           ${{ steps.get_repo_owner.outputs.repo_owner }} 
           --password-stdin
-      - name: Publish functions
+      - name: Publish multi-arch functions
         run: >
           OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}" 
           TAG="latest"
@@ -46,3 +46,14 @@ jobs:
           faas-cli publish
           --extra-tag ${{ github.sha }}
           --platforms linux/arm/v7,linux/arm64,linux/amd64
+
+      - name: Publish amd64-only functions
+        run: >
+          OWNER="${{ steps.get_repo_owner.outputs.repo_owner }}" 
+          TAG="latest"
+          SERVER="ghcr.io"
+          faas-cli publish
+          --extra-tag ${{ github.sha }}
+          --platforms linux/amd64
+          -f stack-amd64.yml
+

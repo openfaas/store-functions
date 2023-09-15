@@ -1,0 +1,10 @@
+provider:
+  name: openfaas
+
+# Functions which are x86_64 only, and cannot be built for the Arm architecture
+
+functions:
+  sentimentanalysis:
+    lang: dockerfile
+    handler: ./sentimentanalysis
+    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/sentimentanalysis:${TAG:-latest}
