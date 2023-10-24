@@ -91,6 +91,11 @@ functions:
     handler: ./certinfo
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/certinfo-fn:${TAG:-latest}
 
+  external-ip:
+    lang: golang-middleware
+    handler: ./external-ip
+    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/external-ip-fn:${TAG:-latest}
+
 configuration:
   templates:
     - name: golang-middleware
