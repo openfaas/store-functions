@@ -26,7 +26,7 @@ RUN mkdir -p bin
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=${CGO_ENABLED} \
     go build --ldflags "-s -w" -a -installsuffix cgo -o bin/hey .
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.17.3
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.19.1
 RUN apk --no-cache add ca-certificates \
     && addgroup -S app && adduser -S -g app app \
     && mkdir -p /home/app \
