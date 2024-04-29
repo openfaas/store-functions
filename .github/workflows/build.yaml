@@ -26,9 +26,9 @@ jobs:
       - name: Get faas-cli
         run: curl -sLSf https://cli.openfaas.com | sudo sh
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Get Repo Owner
         id: get_repo_owner
