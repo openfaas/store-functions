@@ -15,6 +15,7 @@ RUN apk add --no-cache curl bash ca-certificates
 RUN curl -SLs https://get.arkade.dev | sh && \
     arkade get yt-dlp && \
     mv $HOME/.arkade/bin/yt-dlp /usr/local/bin/ && \
+    chmod +x /usr/local/bin/yt-dlp && \
     rm -rf /tmp/* && rm -rf /usr/local/bin/arkade
 
 # Add non root user
