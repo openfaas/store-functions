@@ -96,8 +96,15 @@ functions:
     handler: ./external-ip
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/external-ip-fn:${TAG:-latest}
 
+  markdown:
+    lang: golang-middleware
+    handler: ./markdown
+    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/markdown-fn:${TAG:-latest}
+
+
 configuration:
   templates:
     - name: golang-middleware
       source: https://github.com/openfaas/golang-http-template
+
 
