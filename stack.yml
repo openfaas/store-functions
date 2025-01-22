@@ -100,11 +100,14 @@ functions:
     lang: golang-middleware
     handler: ./markdown
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/markdown-fn:${TAG:-latest}
+  
+  nvidia-smi:
+    lang: dockerfile
+    handler: ./nvidia-smi
+    image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/nvidia-smi:${TAG:-latest}
 
 
 configuration:
   templates:
     - name: golang-middleware
       source: https://github.com/openfaas/golang-http-template
-
-
