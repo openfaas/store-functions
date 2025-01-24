@@ -36,6 +36,7 @@ jobs:
 
       - name: Pull templates
         run: |
+          faas-cli template pull https://github.com/openfaas/templates
           faas-cli template pull https://github.com/openfaas/templates-classic
           faas-cli template pull https://github.com/openfaas/golang-http-template
 
