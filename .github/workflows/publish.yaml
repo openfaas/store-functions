@@ -28,6 +28,12 @@ jobs:
         id: get_repo_owner
         run: echo "REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" > $GITHUB_ENV
 
+      - name: Pull templates
+        run: |
+          faas-cli template pull https://github.com/openfaas/templates
+          faas-cli template pull https://github.com/openfaas/templates-classic
+          faas-cli template pull https://github.com/openfaas/golang-http-template
+
       - name: Docker Login
         run: > 
           echo ${{ secrets.GITHUB_TOKEN }} | 
