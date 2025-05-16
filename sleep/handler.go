@@ -22,6 +22,10 @@ func init() {
 // of time between those two figures
 func Handle(req []byte) string {
 
+	if v := os.Getenv("Http_Path"); v == "/_/ready" {
+		return "ok"
+	}
+
 	if minV, ok := os.LookupEnv("Http_X_Min_Sleep"); ok && len(minV) > 0 {
 		if maxV, ok := os.LookupEnv("Http_X_Max_Sleep"); ok && len(maxV) > 0 {
 			minSleep, _ := time.ParseDuration(minV)
