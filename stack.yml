@@ -69,12 +69,11 @@ functions:
       com.openfaas.ui.ext: "mp4"
 
   sleep:
-    lang: go
+    lang: golang-middleware
     handler: ./sleep
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/sleep:${TAG:-latest}
     environment:
       sleep_duration: 2s
-      combine_output: false
 
   haveibeenpwned:
     lang: go
@@ -100,12 +99,11 @@ functions:
     lang: golang-middleware
     handler: ./markdown
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/markdown-fn:${TAG:-latest}
-  
+
   nvidia-smi:
     lang: dockerfile
     handler: ./nvidia-smi
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/nvidia-smi:${TAG:-latest}
-
 
 configuration:
   templates:

@@ -4,15 +4,26 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
 	"os"
 	"time"
 )
 
-var r *rand.Rand
+var (
+	random          *rand.Rand
+	defaultDuration time.Duration = time.Second * 2
+)
 
 func init() {
+	random = rand.New(rand.NewSource(time.Now().Unix()))
 
-	r = rand.New(rand.NewSource(time.Now().Unix()))
+	if val, ok := os.LookupEnv("sleep_duration"); ok && len(val) > 0 {
+		var err error
+		defaultDuration, err = time.ParseDuration(val)
+		if err != nil {
+			log.Fatalf("Error parsing sleep_duration environment variable: %v", err)
+		}
+	}
 }
 
 // Handle a serverless request
@@ -20,42 +31,58 @@ func init() {
 // 2. When an X-Sleep header is given, sleep for that amount of time.
 // 3. When the X-Min-Sleep and X-Max-Sleep headers are given, sleep for a random amount
 // of time between those two figures
-func Handle(req []byte) string {
-
-	if v := os.Getenv("Http_Path"); v == "/_/ready" {
-		return "ok"
-	}
-
-	if minV, ok := os.LookupEnv("Http_X_Min_Sleep"); ok && len(minV) > 0 {
-		if maxV, ok := os.LookupEnv("Http_X_Max_Sleep"); ok && len(maxV) > 0 {
-			minSleep, _ := time.ParseDuration(minV)
-			maxSleep, _ := time.ParseDuration(maxV)
+func Handle(w http.ResponseWriter, r *http.Request) {
+	if minV := r.Header.Get("X-Min-Sleep"); len(minV) > 0 {
+		if maxV := r.Header.Get("X-Max-Sleep"); len(maxV) > 0 {
+			minSleep, err := time.ParseDuration(minV)
+			if err != nil {
+				log.Printf("Error parsing X-Min-Sleep header: %v", err)
+				w.WriteHeader(http.StatusBadRequest)
+				fmt.Fprintf(w, "Error parsing X-Min-Sleep header: %v", err)
+				return
+			}
+			maxSleep, err := time.ParseDuration(maxV)
+			if err != nil {
+				log.Printf("Error parsing X-Max-Sleep header: %v", err)
+				w.WriteHeader(http.StatusBadRequest)
+				fmt.Fprintf(w, "Error parsing X-Max-Sleep header: %v", err)
+				return
+			}
 
 			minMs := minSleep.Milliseconds()
 			maxMs := maxSleep.Milliseconds()
 
-			randMs := r.Int63n(maxMs-minMs) + minMs
+			randMs := random.Int63n(maxMs-minMs) + minMs
 
 			sleepDuration, _ := time.ParseDuration(fmt.Sprintf("%dms", randMs))
 
 			log.Printf("Start sleep for: %fs\n", sleepDuration.Seconds())
 			time.Sleep(sleepDuration)
 			log.Printf("Sleep done for: %fs\n", sleepDuration.Seconds())
-			return fmt.Sprintf("Slept for: %fs", sleepDuration.Seconds())
+
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintf(w, "Slept for: %fs", sleepDuration.Seconds())
+			return
 		}
 	}
 
-	sleepDuration := time.Second * 2
+	sleepDuration := defaultDuration
 
-	if val, ok := os.LookupEnv("Http_X_Sleep"); ok && len(val) > 0 {
-		sleepDuration, _ = time.ParseDuration(val)
-	} else if val, ok := os.LookupEnv("sleep_duration"); ok && len(val) > 0 {
-		sleepDuration, _ = time.ParseDuration(val)
+	var err error
+	if val := r.Header.Get("X-Sleep"); len(val) > 0 {
+		sleepDuration, err = time.ParseDuration(val)
+		if err != nil {
+			log.Printf("Error parsing X-Sleep header: %v", err)
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintf(w, "Error parsing X-Sleep header: %v", err)
+			return
+		}
 	}
 
 	log.Printf("Start sleep for: %fs\n", sleepDuration.Seconds())
 	time.Sleep(sleepDuration)
 	log.Printf("Sleep done for: %fs\n", sleepDuration.Seconds())
 
-	return fmt.Sprintf("Slept for: %fs", sleepDuration.Seconds())
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "Slept for: %fs", sleepDuration.Seconds())
 }
