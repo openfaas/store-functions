@@ -52,7 +52,18 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 			minMs := minSleep.Milliseconds()
 			maxMs := maxSleep.Milliseconds()
 
-			randMs := random.Int63n(maxMs-minMs) + minMs
+			// Normalize and handle edge cases to avoid panic in Int63n
+			if maxMs < minMs {
+				minMs, maxMs = maxMs, minMs
+			}
+
+			var randMs int64
+			rangeMs := maxMs - minMs
+			if rangeMs <= 0 {
+				randMs = minMs // min == max, use fixed duration
+			} else {
+				randMs = random.Int63n(rangeMs+1) + minMs // inclusive of max
+			}
 
 			sleepDuration, _ := time.ParseDuration(fmt.Sprintf("%dms", randMs))
 
