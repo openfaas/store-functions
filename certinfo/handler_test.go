@@ -7,7 +7,7 @@ import (
 
 func TestHandleReturnsCorrectResponse(t *testing.T) {
 	expected := "www.google.com"
-	resp := Handle([]byte("www.google.com/about/"))
+	resp := handle([]byte("www.google.com/about/"))
 
 	r := regexp.MustCompile("(?m:" + expected + ")")
 	if !r.MatchString(resp) {
@@ -17,7 +17,7 @@ func TestHandleReturnsCorrectResponse(t *testing.T) {
 
 func TestHandleReturnsMultiSanResponse(t *testing.T) {
 	expected := ".stefanprodan.com"
-	resp := Handle([]byte("stefanprodan.com"))
+	resp := handle([]byte("stefanprodan.com"))
 
 	r := regexp.MustCompile("(?m:" + expected + ")")
 	if !r.MatchString(resp) {

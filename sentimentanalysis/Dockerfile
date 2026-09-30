@@ -1,5 +1,5 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.3 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3.11
+FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.9 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3.13
 
 RUN mkdir -p /home/app
 

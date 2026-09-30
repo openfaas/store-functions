@@ -3,7 +3,7 @@ provider:
 
 functions:
   cows:
-    lang: node18
+    lang: node25
     handler: ./cows
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/cows:${TAG:-latest}
 
@@ -38,7 +38,7 @@ functions:
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/nslookup:${TAG:-latest}
 
   nodeinfo:
-    lang: node18
+    lang: node25
     handler: ./nodeinfo
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/nodeinfo:${TAG:-latest}
 
@@ -76,7 +76,7 @@ functions:
       sleep_duration: 2s
 
   haveibeenpwned:
-    lang: go
+    lang: golang-middleware
     handler: ./haveibeenpwned
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/haveibeenpwned:${TAG:-latest}
 
@@ -86,7 +86,7 @@ functions:
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/printer:${TAG:-latest}
 
   certinfo:
-    lang: go
+    lang: golang-middleware
     handler: ./certinfo
     image: ${SERVER:-ghcr.io}/${OWNER:-openfaas}/certinfo-fn:${TAG:-latest}
 

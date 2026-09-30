@@ -1,6 +1,6 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.3 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.9 as watchdog
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.21.3 as ship
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.24.2 as ship
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog

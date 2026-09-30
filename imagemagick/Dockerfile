@@ -1,6 +1,6 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.3 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.9 as watchdog
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.21.3
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.24.2
 
 RUN mkdir -p /home/app
 

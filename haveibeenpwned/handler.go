@@ -9,15 +9,26 @@ import (
 	"crypto/sha1"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
 )
 
 // Handle a serverless request
-func Handle(payload []byte) string {
+func Handle(w http.ResponseWriter, r *http.Request) {
+	var payload []byte
 
+	if r.Body != nil {
+		defer r.Body.Close()
+
+		payload, _ = io.ReadAll(r.Body)
+	}
+
+	w.Write([]byte(handle(payload)))
+}
+
+func handle(payload []byte) string {
 	if len(payload) == 0 {
 		return "Enter a number of characters."
 	}
@@ -38,7 +49,7 @@ func Handle(payload []byte) string {
 	var bytesOut []byte
 	if res.Body != nil {
 		defer res.Body.Close()
-		bytesOut, _ = ioutil.ReadAll(res.Body)
+		bytesOut, _ = io.ReadAll(res.Body)
 	}
 
 	passwords := string(bytesOut)
