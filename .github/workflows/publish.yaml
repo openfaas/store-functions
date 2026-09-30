@@ -47,7 +47,6 @@ jobs:
           SERVER="ghcr.io"
           faas-cli publish
           --extra-tag ${{ github.sha }}
-          --build-arg GO111MODULE=on
           --platforms linux/arm64,linux/amd64
 
       - name: Publish amd64-only functions
