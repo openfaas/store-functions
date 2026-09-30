@@ -12,7 +12,7 @@ RUN apk add --no-cache git
 # Allows you to add additional packages via build-arg
 ARG ADDITIONAL_PACKAGE
 ARG CGO_ENABLED=0
-ARG GO111MODULE="off"
+ARG GO111MODULE="on"
 ARG GOPROXY=""
 ARG GOFLAGS=""
 
