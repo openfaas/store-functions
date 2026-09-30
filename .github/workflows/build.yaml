@@ -46,7 +46,6 @@ jobs:
           TAG="latest"
           SERVER="ghcr.io"
           faas-cli build
-          --build-arg GO111MODULE=on
           -f stack.yml
 
       - name: Build amd64-only functions
