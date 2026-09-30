@@ -109,3 +109,4 @@ configuration:
   templates:
     - name: golang-middleware
       source: https://github.com/openfaas/golang-http-template
+
