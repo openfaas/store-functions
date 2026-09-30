@@ -6,7 +6,7 @@ import (
 )
 
 func Test_Handle(t *testing.T) {
-	res := Handle([]byte("test1234"))
+	res := handle([]byte("test1234"))
 
 	result := result{}
 	err := json.Unmarshal([]byte(res), &result)

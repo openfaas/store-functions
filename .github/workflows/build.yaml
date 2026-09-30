@@ -36,9 +36,9 @@ jobs:
 
       - name: Pull templates
         run: |
-          faas-cli template pull https://github.com/openfaas/templates
-          faas-cli template pull https://github.com/openfaas/templates-classic
-          faas-cli template pull https://github.com/openfaas/golang-http-template
+          faas-cli template store pull node25
+          faas-cli template store pull dockerfile
+          faas-cli template store pull golang-middleware
 
       - name: Build multi-arch functions
         run: >

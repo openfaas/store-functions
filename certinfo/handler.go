@@ -7,7 +7,9 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net"
+	"net/http"
 	"net/url"
 	"os"
 	"strings"
@@ -16,7 +18,19 @@ import (
 	"github.com/dustin/go-humanize"
 )
 
-func Handle(req []byte) string {
+func Handle(w http.ResponseWriter, r *http.Request) {
+	var payload []byte
+
+	if r.Body != nil {
+		defer r.Body.Close()
+
+		payload, _ = io.ReadAll(r.Body)
+	}
+
+	w.Write([]byte(handle(payload)))
+}
+
+func handle(req []byte) string {
 	request := strings.ToLower(string(req))
 	if !strings.HasPrefix(request, "http") {
 		request = "https://" + request

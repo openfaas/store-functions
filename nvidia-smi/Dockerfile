@@ -1,6 +1,6 @@
-FROM ghcr.io/openfaas/classic-watchdog:0.3.2 AS watchdog
+FROM ghcr.io/openfaas/classic-watchdog:0.3.9 AS watchdog
 
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
