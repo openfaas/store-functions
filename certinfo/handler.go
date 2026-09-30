@@ -11,7 +11,6 @@ import (
 	"net"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"time"
 
@@ -27,10 +26,10 @@ func Handle(w http.ResponseWriter, r *http.Request) {
 		payload, _ = io.ReadAll(r.Body)
 	}
 
-	w.Write([]byte(handle(payload)))
+	w.Write([]byte(handle(payload, r.URL.RawQuery)))
 }
 
-func handle(req []byte) string {
+func handle(req []byte, rawQuery string) string {
 	request := strings.ToLower(string(req))
 	if !strings.HasPrefix(request, "http") {
 		request = "https://" + request
@@ -64,7 +63,7 @@ func handle(req []byte) string {
 	}
 
 	cert := conn.ConnectionState().PeerCertificates[0]
-	asJson := os.Getenv("Http_Query")
+	asJson := rawQuery
 
 	if len(asJson) > 0 && asJson == "output=json" {
 		res := struct {
