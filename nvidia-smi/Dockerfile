@@ -1,4 +1,4 @@
-FROM ghcr.io/openfaas/classic-watchdog:0.3.9 AS watchdog
+FROM ghcr.io/openfaas/classic-watchdog:0.3.10 AS watchdog
 
 FROM ubuntu:26.04
 

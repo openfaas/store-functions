@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.9 as watchdog
+FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.3.10 as watchdog
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.24.2 as ship
 
